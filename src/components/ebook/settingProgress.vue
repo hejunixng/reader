@@ -40,17 +40,20 @@ export default {
     mixins:[vuexmin],
     data(){
         return{
-           
+         
         }
     },
     computed:{
+        // 电子书标题
         getSectionName(){
-            if(this.section){
-                const sectionObj = this.currentbook.section(this.section);
-                if(sectionObj && sectionObj.href){
-                    return this.currentbook.navigation.get(sectionObj.href).label
-                }
-            }
+            // if(this.section){
+            //     const sectionObj = this.currentbook.section(this.section);
+            //     if(sectionObj && sectionObj.href && this.currentbook.navigation){
+            //         return this.currentbook.navigation.get(sectionObj.href).label
+            //     }
+            // }
+
+            return this.section ? this.navigation[this.section].label :''
         }
     },
     methods:{
@@ -106,18 +109,7 @@ export default {
                 })
             }
         },
-        // 阅读时间
-        readTime(){
-            return this.$t('book.haveRead').replace('$1',this.TimeMinutes())
-         },
-         TimeMinutes(){
-             const readTime = getReadTime(this.fileName);
-             if(!readTime){
-                 return 0
-             }else{
-                 return Math.ceil(readTime/60)
-             }
-         }
+
     },
     updated(){
         // 刷新 初始化

@@ -1,21 +1,46 @@
 import {mapGetters,mapActions} from 'vuex';
-import {themeList,addCss,removeAllLink} from './fonSize';
-import {saveLocation} from './localStorage';
+import {themeList,addCss,removeAllLink,TimeMinutes} from './fonSize';
+import {saveLocation,getBookmark} from './localStorage';
+
+// 首页mixins
+export const homemixin={
+    computed:{
+        ...mapGetters(['offsetY','hotsearchoffsety'])
+    },
+    methods:{
+        ...mapActions(['setoffsetY','sethotsearchoffsety'])
+    }
+}
+
+// 读书mixins
 export const vuexmin={
     computed:{
         ...mapGetters(['fileName',
         'menuVisible','settingVisible','defaultFontSize','currentbook','dedauleFamily',
-        'fontFamilyVisible','defaultTheme','bookAvailable','progress','section'
+        'fontFamilyVisible','defaultTheme','bookAvailable','progress','section',
+        'cover','metadata','navigation','offsetY','isBookmark'
         ]),
         themeList(){
             return themeList(this)
+        },
+         // 电子书标题
+         getSectionName(){
+            // if(this.section){
+            //     const sectionObj = this.currentbook.section(this.section);
+            //     if(sectionObj && sectionObj.href && this.currentbook.navigation){
+            //         return this.currentbook.navigation.get(sectionObj.href).label
+            //     }
+            // }
+
+            return this.section ? this.navigation[this.section].label :'';
         }
 
     },
     methods:{
         ...mapActions(['setMenu','vuefile','setsetting',
         'defauleSize','setBook','settingFamily',
-        'setingFontVisible','settingTheme','setbookAvailable','setProgress','setsection'
+        'setingFontVisible','settingTheme','setbookAvailable','setProgress','setsection',
+        'settingcover','setmetadata','setnavigation','setoffsetY','setisBookmark'
     
     ]),
     // 全局样式
@@ -46,13 +71,29 @@ export const vuexmin={
         // 获取当前进度
         const currentLocation = this.currentbook.rendition.currentLocation();
         const startCfi = currentLocation.start.cfi;
-        // 换成百分比
-        const progress  = this.currentbook.locations.percentageFromCfi(startCfi);
-        // 更改progress
-        this.setProgress(Math.floor(progress*100));
-        this.setsection(currentLocation.start.index)
-        // 存储到localstorage
-        saveLocation(this.fileName,startCfi)
+        if(currentLocation&& startCfi){
+            // 换成百分比
+            const progress  = this.currentbook.locations.percentageFromCfi(startCfi);
+            // 更改progress
+            this.setProgress(Math.floor(progress*100));
+            this.setsection(currentLocation.start.index)
+            // 存储到localstorage
+            saveLocation(this.fileName,startCfi);
+            // 书签
+            const bookmark = getBookmark(this.fileName);
+            if(bookmark){
+                // 如果书签里面其中一个cfi 和当前的页面startcfi对比
+                if(bookmark.some(item=> item.cfi === startCfi)){
+                    this.setisBookmark(true)
+                }else{
+                    this.setisBookmark(false)
+                }
+            }else{
+                this.setisBookmark(false)
+            }
+            // console.log(bookmark);
+        }
+        
     },
     display(target,cb){
         if(target){
@@ -66,8 +107,25 @@ export const vuexmin={
                 if(cb) cb()
             })
         }
-    }
+        
+    },
+    // 隐藏菜单栏
+    hideTitle(){
+        this.setMenu(false);
+        this.setsetting(-1)
+        // 字体设置栏
+        this.setingFontVisible(false)
+    },
 
+ 
+    // 阅读时间
+  readTime(){
+    return this.$t('book.haveRead').replace('$1',TimeMinutes(this.fileName))
+ },
+
+ read(){
+    console.log(1);
+ }
 
     }
 }

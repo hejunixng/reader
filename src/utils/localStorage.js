@@ -92,3 +92,12 @@ export function saveReadTime(fileName,readtime){
 export function getReadTime(fileName){
     return getBookObject(fileName,'readtime')
 }
+
+// 书签
+export function getBookmark(fileName) {
+    return getBookObject(fileName, 'bookmark')
+  }
+  
+  export function saveBookmark(fileName, bookmark) {
+    setBookObject(fileName, 'bookmark', bookmark)
+  }

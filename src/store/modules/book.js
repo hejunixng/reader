@@ -12,8 +12,8 @@ const book ={
         bookAvailable:false,//
         section:0,//章节
         navigation: null,
-        cover: null,
-        metadata: null,
+        cover: null,//目录图书封面
+        metadata: null,//作者
         paginate: '',
         pagelist: null,
         offsetY: 0,
@@ -64,8 +64,23 @@ const book ={
         // 章节
         setsection(state,section){
             state.section = section
+        },
+        settingcover(state,cover){
+            state.cover = cover
+        },
+        setmetadata(state,metadata){
+            state.metadata = metadata
+        },
+        // 
+        setnavigation(state,navigation){
+            state.navigation = navigation
+        },
+        setoffsetY(state,offsetY){
+            state.offsetY =offsetY
+        },
+        setisBookmark(state,isBookmark){
+            state.isBookmark = isBookmark
         }
-
 
     },
     

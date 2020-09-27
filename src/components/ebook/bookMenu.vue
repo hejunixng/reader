@@ -22,7 +22,10 @@
       <showpopu></showpopu>
       <!-- 主题选择 -->
       <setthemes></setthemes>
+      <!-- 进度条 -->
       <setprogress></setprogress>
+      <!-- 目录 -->
+      <slidepage></slidepage>
     </div>
 </template>
 
@@ -31,6 +34,7 @@ import setfont from './settingFont';
 import showpopu from './showPopu';
 import setthemes from './settingthemes';
 import setprogress from './settingProgress';
+import slidepage from './bookSlide';
 import {vuexmin} from '../../utils/mixins';
 import {mapActions} from 'vuex';
 export default {
@@ -45,7 +49,8 @@ export default {
         setfont,
        showpopu,
        setthemes,
-       setprogress
+       setprogress,
+       slidepage
     },
     methods:{
         showSetting(key){

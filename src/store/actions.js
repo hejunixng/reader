@@ -33,6 +33,27 @@ const actions={
     },
     setsection({commit},section){
         return commit('setsection',section)
+    },
+    settingcover({commit},cover){
+        return commit('settingcover',cover)
+    },
+    setmetadata({commit},metadata){
+        return commit('setmetadata',metadata)
+    },
+    setnavigation({commit},navigation){
+        return commit('setnavigation',navigation)
+    },
+    setoffsetY({commit},offsetY){
+        return commit('setoffsetY',offsetY)
+    },
+    setisBookmark({commit},isBookmark){
+        return commit('setisBookmark',isBookmark)
+    },
+    sethotsearchoffsety({commit},hotsearchoffsety){
+        return commit('sethotsearchoffsety',hotsearchoffsety)
+    },
+    setflapcardVicible({commit},flapcardVicible){
+        return commit('setflapcardVicible',flapcardVicible)
     }
 }
 export default actions;

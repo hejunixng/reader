@@ -8,7 +8,7 @@ export default new Router({
     routes: [{
             path: '/',
             name: 'home',
-            redirect: '/ebook',    
+            redirect: '/store',    
         },{
             path:'/ebook',
             name:'ebook',
@@ -18,6 +18,19 @@ export default new Router({
                     path:':fileName',
                     name:'fileName',
                     component:()=>import('./components/ebook/bookreader.vue')
+                }
+            ]
+        },
+        {
+            path:'/store',
+            name:'bookstore',
+            redirect:'/store/home',
+            component:()=>import('./views/store/index.vue'),
+            children:[
+                {
+                    path:'home',
+                    name:'storehome',
+                    component:()=>import('./views/store/storehome.vue')
                 }
             ]
         }

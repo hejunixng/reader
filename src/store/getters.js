@@ -30,6 +30,27 @@ const book={
     },
     section(state){
         return state.book.section
+    },
+    cover(state){
+        return state.book.cover
+    },
+    metadata(state){
+        return state.book.metadata
+    },
+    navigation(state){
+        return state.book.navigation
+    },
+    offsetY(state){
+        return state.book.offsetY
+    },
+    isBookmark(state){
+        return state.book.isBookmark
+    },
+    hotsearchoffsety(state){
+        return state.home.hotsearchoffsety
+    },
+    flapcardVicible(state){
+        return state.home.flapcardVicible
     }
     
 

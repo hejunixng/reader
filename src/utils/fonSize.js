@@ -1,5 +1,6 @@
 import { vuexmin } from "./mixins";
-
+import {getReadTime} from './localStorage';
+import {realPx} from './utils';
 export const FontSize=[
     {fontSize:12},
     {fontSize:14},
@@ -27,7 +28,9 @@ export function themeList(vue){
             style:{
               body:{
                 'color':'#4c5059',
-                'background':'#cecece'
+                'background':'#cecece',
+                'padding-top':`${realPx(48)}px!important`,
+                'padding-bottom':`${realPx(48)}px!important`
             }
             }
         },
@@ -38,7 +41,8 @@ export function themeList(vue){
               body: {
                 'color': '#5c5b56',
                 'background': '#c6c2b6',
-               
+                'padding-top':`${realPx(48)}px!important`,
+                'padding-bottom':`${realPx(48)}px!important`
               }
         }
      },
@@ -49,7 +53,8 @@ export function themeList(vue){
           body: {
             'color': '#404c42',
             'background': '#a9c1a9',
-         
+            'padding-top':`${realPx(48)}px!important`,
+            'padding-bottom':`${realPx(48)}px!important`
           },
      }
     },
@@ -60,7 +65,8 @@ export function themeList(vue){
           body: {
             'color': '#cecece',
             'background': '#000000',
-          
+            'padding-top':`${realPx(48)}px!important`,
+            'padding-bottom':`${realPx(48)}px!important`
           }
         }
     }
@@ -93,4 +99,20 @@ export function removeAllLink(){
   removelink(`${process.env.VUE_APP_RES_URL}/theme/theme_eye.css`);
   removelink(`${process.env.VUE_APP_RES_URL}/theme/theme_gold.css`);
   removelink(`${process.env.VUE_APP_RES_URL}/theme/theme_night.css`);
+}
+
+// 计算时间
+      
+export function TimeMinutes(fileName){
+  const readTime = getReadTime(fileName);
+  if(!readTime){
+      return 0
+  }else{
+      return Math.ceil(readTime/60)
+  }
+}
+
+// 数组变为一维数组
+export function flatten(array) {
+  return [].concat(...array.map(item => [].concat(item, ...flatten(item.subitems))))
 }

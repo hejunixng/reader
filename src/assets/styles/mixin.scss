@@ -133,7 +133,15 @@ $ratio: 375 / 10;
     height: px2rem(155)
   }
 }
-
+.icon{
+  color: #666;
+  font-size:px2rem(16) ;
+}
+.title{
+  color: #666;
+  font-size: px2rem(16);
+  font-weight: bold;
+}
 .slide-down-enter, .slide-down-leave-to {
   transform: translate3d(0, -100%, 0)
 }

@@ -54,6 +54,24 @@ const actions={
     },
     setflapcardVicible({commit},flapcardVicible){
         return commit('setflapcardVicible',flapcardVicible)
+    },
+    setShelfList({ commit }, list) {
+        return commit('setShelfList', list)
+      },
+      setshelfSelected({commit},shelfSelected){
+        return commit('setshelfSelected',shelfSelected)
+    },
+    setshelfTitleVisible({ commit },shelfTitleVisible){
+        return commit('setshelfTitleVisible',shelfTitleVisible)
+    },
+    setisEditMode({commit},isEditMode){
+        return commit('setisEditMode',isEditMode)
+    },
+    setshelfCategory({commit},shelfCategory){
+        return commit('setshelfCategory',shelfCategory)
+    },
+    setcurrentType({commit},currentType){
+       return commit('setcurrentType',currentType)
     }
 }
 export default actions;

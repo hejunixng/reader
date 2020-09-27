@@ -1,14 +1,93 @@
 import {mapGetters,mapActions} from 'vuex';
 import {themeList,addCss,removeAllLink,TimeMinutes} from './fonSize';
-import {saveLocation,getBookmark} from './localStorage';
+import {saveLocation,getBookmark,getBookShelf,saveBookShelf} from './localStorage';
+import {shelf} from '../api/store';
+import {appendToShelf} from './store';
+
+// 书架
+export const shelfmixin={
+    computed:{
+        ...mapGetters(['offsetY','shelfList',
+        'shelfSelected','shelfTitleVisible','isEditMode','shelfCategory','currentType'
+    ])
+    },
+    methods:{
+        ...mapActions(['setoffsetY','setShelfList','setshelfSelected',
+        'setshelfTitleVisible','setisEditMode','setshelfCategory','setcurrentType']),
+        // 电子书跳转详情页
+        showBookDetail(book){
+            // console.log('data');
+            this.$router.push({
+                path:'/store/detail',
+                query:{
+                    fileName:book.fileName,
+                    category:book.categoryText
+                }
+            })
+        },
+        getshelfCategory(title){
+            this.getShelfList().then(()=>{
+                // 找出外面的title是等于route的title的
+                const categorylist = this.shelfList.filter(book => book.type === 2 && book.title === title)[0];
+                this.setshelfCategory(categorylist);
+                // console.log(this.shelfList.filter(book => book.type === 2 && book.title === title));
+            })
+        },
+        getShelfList() {
+            let shelfList = getBookShelf();
+            // console.log(shelfList);
+            if (!shelfList) {
+              shelf().then(response => {
+                if (response.status === 200 && response.data && response.data.bookList) {
+                  shelfList = appendToShelf(response.data.bookList)
+                  saveBookShelf(shelfList);
+                //   return promise对象
+                  return this.setShelfList(shelfList)
+                }
+              })
+            } else {
+              return this.setShelfList(shelfList)
+            }
+          },
+    }
+}
+
 
 // 首页mixins
 export const homemixin={
     computed:{
-        ...mapGetters(['offsetY','hotsearchoffsety'])
+        ...mapGetters(['offsetY','hotsearchoffsety','flapcardVicible','shelfList'
+        ])
     },
     methods:{
-        ...mapActions(['setoffsetY','sethotsearchoffsety'])
+        ...mapActions(['setoffsetY','sethotsearchoffsety','setShelfList',
+        'setflapcardVicible']),
+        // 电子书跳转详情页
+        showBookDetail(book){
+            // console.log('data');
+            this.$router.push({
+                path:'/store/detail',
+                query:{
+                    fileName:book.fileName,
+                    category:book.categoryText
+                }
+            })
+        },
+        getShelfList() {
+            let shelfList = getBookShelf();
+            // console.log(shelfList);
+            if (!shelfList) {
+              shelf().then(response => {
+                if (response.status === 200 && response.data && response.data.bookList) {
+                  shelfList = appendToShelf(response.data.bookList)
+                  saveBookShelf(shelfList)
+                  return this.setShelfList(shelfList)
+                }
+              })
+            } else {
+              return this.setShelfList(shelfList)
+            }
+          },
     }
 }
 

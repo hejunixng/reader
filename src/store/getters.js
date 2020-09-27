@@ -51,6 +51,24 @@ const book={
     },
     flapcardVicible(state){
         return state.home.flapcardVicible
+    },
+    shelfList(state){
+        return state.home.shelfList
+    },
+    shelfSelected(state){
+       return  state.home.shelfSelected
+    },
+    shelfTitleVisible(state){
+       return state.home.shelfTitleVisible
+    },
+    isEditMode(state){
+        return state.home.isEditMode
+    },
+    shelfCategory(state){
+        return state.home.shelfCategory
+    },
+    currentType(state){
+        return state.home.currentType
     }
     
 

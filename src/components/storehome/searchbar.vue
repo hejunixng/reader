@@ -9,7 +9,7 @@
                     <span class="title-text title">{{$t('home.title')}}</span>
                 </div>
                 <!-- 摇一摇 -->
-                <div class="title-icon-shake-wrapper">
+                <div class="title-icon-shake-wrapper" @click="showflap">
                     <span class="icon-shake icon"></span>
                 </div>
             </div>
@@ -31,6 +31,7 @@
                 :placeholder="$t('home.hint')"
                 v-model="searchtext"
                 @click="showsearch"
+                @keyup.13.exact="search"
             >
         </div>
     </div>
@@ -80,6 +81,19 @@ export default {
 
     },
     methods:{
+      // 搜索框回车 搜索,跳转list页面
+      search(){
+        this.$router.push({
+          path:'/store/list',
+          query:{
+            keyword:this.searchtext
+          }
+        })
+      },
+       showflap(){
+            // 加载动画
+            this.setflapcardVicible(true)
+        },
         back(){
             // 返回按钮
             if(this.offsetY >0){
@@ -87,7 +101,12 @@ export default {
             }else{
                 this.hideshadowVisible()
             }
-
+            if(this.searchVisible){
+              this.hidesearch()
+            }else{
+              console.log(1);
+              this.$router.push('/store/shelf')
+            }
             this.hidesearch();
            
         },

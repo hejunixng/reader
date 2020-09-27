@@ -6,10 +6,13 @@ import router from './router'
 import VueAxios from 'vue-axios'
 import Axios from 'axios';
 import i18n from './lang';
+import './mock';
 // 字体图标
 import './assets/styles/icon.css';
 import './assets/styles/gobal.scss';
-
+// 数组不重复
+import './utils/push';
+import './utils/createApi';
 
 Vue.config.productionTip = false
 

@@ -12,10 +12,7 @@ export default {
   components: {
     
   },
-  mounted(){
-    
-    
-  }
+
 }
 
 // rem

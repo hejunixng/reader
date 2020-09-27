@@ -17,8 +17,9 @@ import{vuexmin} from '../../utils/mixins';
 import {getFontFamily,saveFontFaminly,
 getFontSize,saveFontSize,
 getTheme,saveTheme, getLocation,
-display
+display,
 } from '../../utils/localStorage';
+import {getLocalForage} from '../../utils/localForage';
 import {addCss,flatten} from '../../utils/fonSize'
 import Epub from 'epubjs';
 global.ePub = Epub;
@@ -213,8 +214,8 @@ export default {
             },
 
         // 1.
-        initEpub(){
-            const url=process.env.VUE_APP_RES_URL+'/epujs/' + this.fileName + '.epub';
+        initEpub(url){
+            
         //    console.log(url);
         //    初始化book对象
           this.book = new Epub(url);
@@ -294,12 +295,21 @@ export default {
     },
     mounted(){
         // 得到链接
-        
-         const fileName = this.$route.params.fileName.split('|').join('/');
-        //  console.log(fileName);
-        this.$store.dispatch('vuefile',fileName).then((res)=>{
-            this.initEpub();
-           
+         const books = this.$route.params.fileName.split('|');
+        //  拿到书名，在localstorage
+         const fileName = books[1];
+         getLocalForage(fileName,(err,blob)=>{
+            //  查看是否有缓存
+                if (!err && blob) {
+                    this.setFileName(books.join('/')).then(() => {
+                        this.initEpub(blob)
+                    })
+                    } else {
+                    this.setFileName(books.join('/')).then(() => {
+                        const url = process.env.VUE_APP_EPUB_URL + '/' + this.fileName + '.epub'
+                        this.initEpub(url)
+                    })
+                    }
             
            
         });

@@ -10,7 +10,7 @@
 //mock不支持二进制，所以下载之类的操作不能用，自己写
 module.exports={
     lintOnSave: false,
-    publicPath:process.env.NODE_ENV === 'production'
+    publicPath:process.env.NODE_ENV === 'production',
     ? './'
     : '/',
     devServer: {

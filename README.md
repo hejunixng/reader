@@ -2,6 +2,7 @@
 
 ## Project setup
 ```
+图书阅读
 npm install
 ```
 

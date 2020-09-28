@@ -64,7 +64,7 @@ export default {
         // }
     },
     mounted(){
-    //    console.log(this.$route.query.title);
+    
         this.getshelfCategory(this.$route.query.title);
         this.setcurrentType(2)
     },

@@ -75,9 +75,9 @@
       getList() {
         
         list().then(response => {
-          // console.log(1);
+         
           this.list = response.data.data;
-          console.log(response);
+          console.log(this.list);
           // console.log(this.list);
           this.total = response.data.total
           const category = this.$route.query.category

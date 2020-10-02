@@ -92,7 +92,7 @@ export default {
                 this.categoryList = data.categoryList;
                
                 this.categories = data.categories;
-                //  console.log(  this.categories);
+                 console.log(  this.recommend);
             }
         })
     }

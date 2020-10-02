@@ -31,7 +31,7 @@ export default {
         }
     },
     components:{
-        
+        scroll
     },
     methods:{
         scll(){

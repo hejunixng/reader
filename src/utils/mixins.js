@@ -35,7 +35,7 @@ export const shelfmixin={
         },
         getShelfList() {
             let shelfList = getBookShelf();
-            console.log(shelfList);
+            // console.log(shelfList);
             if (!shelfList) {
               shelf().then(response => {
                 if (response.status === 200 && response.data && response.data.bookList) {

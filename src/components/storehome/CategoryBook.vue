@@ -38,6 +38,7 @@ import {homemixin} from '../../utils/mixins';
             categoryText: this.categoryText(this.data.category)
           }
         })
+        console.log( getCategoryName(this.data.category));
       },
       categoryText(category) {
         // console.log(category);

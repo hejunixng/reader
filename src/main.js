@@ -6,7 +6,7 @@ import router from './router'
 import VueAxios from 'vue-axios'
 import Axios from 'axios';
 import i18n from './lang';
-import './mock';
+// import './mock';
 // 字体图标
 import './assets/styles/icon.css';
 import './assets/styles/gobal.scss';

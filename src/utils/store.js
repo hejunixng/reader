@@ -1,3 +1,6 @@
+import { shelf } from '../api/store';
+import {getBookShelf, getLocalStroage, saveBookShelf, setLocalStorage} from './localStorage';
+
 // 书架方法
 export function appendToShelf(list){
   list.push({
@@ -6,7 +9,30 @@ export function appendToShelf(list){
   })
   return list
 }
-
+// 添加到书架
+export function addToShelf(book) {
+  // 获取书籍
+  let shelfList = getBookShelf()
+  shelfList = removeAddFromShelf(shelfList)
+  book.type = 1
+  shelfList.push(book)
+  shelfList = computeId(shelfList)
+  shelfList = appendToShelf(shelfList)
+  saveBookShelf(shelfList)
+}
+// 改变图书index
+export function computeId(list) {
+  return list.map((book, index) => {
+    if (book.type !== 3) {
+      book.id = index + 1
+      if (book.itemList) {
+        book.itemList = computeId(book.itemList)
+      }
+    }
+    return book
+  })
+}
+// 去除 空书框
 export function removeShelf(list){
   return list.filter(item=>item.tyle !== 3);
 }
@@ -15,6 +41,24 @@ export function gostorehome(vue){
       vue.$router.push({
         path:'/store/home'
       })
+}
+// 书架中移除书籍
+export function removeFromBookShelf(book) {
+  return getBookShelf().filter(item => {
+    if (item.itemList) {
+      
+      item.itemList = removeAddFromShelf(item.itemList)
+    }
+    // 移除当前书籍 留下和当前书籍不一样的其他书籍
+    console.log(item.fileName );
+    return item.fileName !== book.fileName
+  })
+}
+    
+
+// 去除 空书框
+export function removeAddFromShelf(list) {
+  return list.filter(item => item.type !== 3)
 }
 
 // 翻转动画

@@ -94,41 +94,56 @@ export default {
                 })
             }
       },
-        downloadBook(book){
-            let text = 'please waitting...';
-            const toast = this.totast({
+        // downloadBook(book){
+        //     let text = 'please waitting...';
+        //     const toast = this.totast({
+        //         text
+        //     })
+        //     toast.continueShow()
+        //     // 异步下载
+        //     // console.log(this.shelfList);
+        //     return new Promise((resolve,reject)=>{
+        //         download(book,(res)=>{ 
+        //             // 成功回调
+        //             // console.log('ok');
+        //             resolve(book)
+        //         },()=>{
+        //             // console.log("11");
+        //         },progressEvent=>{
+        //         //   下载进度
+        //         const progress = Math.floor(progressEvent.loaded / progressEvent.total * 100) + '%'
+        //     const tt = this.$t('shelf.progressDownload').replace('$1', `${book.fileName}.epub(${progress})`)
+        //         // toast.updateText('please waitting')
+        //         // console.log(progressEvent);
+        //         })
+        //     })
+        // },
+         downloadBook(book) {
+                let text = ''
+                const toast = this.totast({
                 text
-            })
-            toast.continueShow()
-            // 异步下载
-            // console.log(this.shelfList);
-            return new Promise((resolve,reject)=>{
-                download(book,(res)=>{ 
-                    // 成功回调
-                    // console.log('ok');
+                })
+                toast.continueShow()
+                return new Promise((resolve, reject) => {
+                download(book, book => {
+                    toast.remove()
                     resolve(book)
-                },()=>{
-                    // console.log("11");
-                },progressEvent=>{
-                //   下载进度
-                const progress = Math.floor(progressEvent.loaded / progressEvent.total * 100) + '%'
-            const tt = this.$t('shelf.progressDownload').replace('$1', `${book.fileName}.epub(${progress})`)
-                // toast.updateText('please waitting')
-                // console.log(progressEvent);
+                }, reject, progressEvent => {
+                    const progress = Math.floor(progressEvent.loaded / progressEvent.total * 100) + '%'
+                    text = this.$t('shelf.progressDownload').replace('$1', `${book.fileName}.epub(${progress})`)
+                    toast.updateText('waiting')
                 })
-            })
-        },
+                })
+      },
         removeSelectedBook() {
-            Promise.all(this.shelfSelected.map(book => this.removeBook(book)))
-            .then(books => {
-                books.map(book => {
-                book.cache = false
-                })
-                saveBookShelf(this.shelfList)
-
-                // console.log(this.shelfList); 
-                this.simpleToast(this.$t('shelf.removeDownloadSuccess'))
+        Promise.all(this.shelfSelected.map(book => this.removeBook(book)))
+          .then(books => {
+            books.map(book => {
+              book.cache = false
             })
+            saveBookShelf(this.shelfList)
+            this.simpleToast(this.$t('shelf.removeDownloadSuccess'))
+          })
       },
       removeBook(book) {
         return new Promise((resolve, reject) => {
@@ -137,7 +152,7 @@ export default {
           resolve(book)
         })
       },
-       async setDownload(){
+       async setDownload() {
          this.setisEditMode(false);
             // 存储到localstorage
            
@@ -147,9 +162,10 @@ export default {
 
         if (this.isdownload) {
             // 移除
-            // console.log('remove');
+            console.log('remove');
           this.removeSelectedBook()
         } else {
+            console.log('re');
             // 异步下载，等待下载完成
           await this.downloadSelectedBook()
           saveBookShelf(this.shelfList)

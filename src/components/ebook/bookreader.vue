@@ -216,12 +216,12 @@ export default {
         // 1.
         initEpub(url){
             
-        //    console.log(url);
+          
         //    初始化book对象
           this.book = new Epub(url);
                 //  console.log(this.book);
+                 
             this.setBook(this.book);
-            
             this.parseBook();
                this.rendition= this.book.renderTo('read',{
                     width:window.innerWidth,
@@ -234,6 +234,7 @@ export default {
 
         this.display(location,()=>{
             // 查询localstorage的字体
+            console.log(1);
             let font = getFontFamily(this.fileName);
             if(!font){
                 saveFontFaminly(this.fileName,this.dedauleFamily)
@@ -287,6 +288,29 @@ export default {
         }).then(locations=>{
             // 分页完成后才能拉动进度条
             this.setbookAvailable(true);
+            locations.forEach(item => {
+            const loc = item.match(/\[(.*)\]!/)[1]
+            this.navigation.forEach(nav => {
+              if (nav.href) {
+                const href = nav.href.match(/^(.*)\.html$/)
+                if (href) {
+                  if (href[1] === loc) {
+                    //   console.log(nav);
+                    nav.pagelist.push(item)
+                  }
+                }
+              }
+            })
+            let currentPage = 1
+            this.navigation.forEach((nav, index) => {
+              if (index === 0) {
+                nav.page = 1
+              } else {
+                nav.page = currentPage
+              }
+            //   currentPage += nav.pagelist.length + 1
+            })
+          })
             //分页后 跟新progress
             this.refresh()})
 
@@ -297,19 +321,27 @@ export default {
         // 得到链接
          const books = this.$route.params.fileName.split('|');
         //  拿到书名，在localstorage
+        
          const fileName = books[1];
+         
          getLocalForage(fileName,(err,blob)=>{
             //  查看是否有缓存
-                if (!err && blob) {
-                    this.setFileName(books.join('/')).then(() => {
-                        this.initEpub(blob)
-                    })
-                    } else {
-                    this.setFileName(books.join('/')).then(() => {
-                        const url = process.env.VUE_APP_EPUB_URL + '/' + this.fileName + '.epub'
-                        this.initEpub(url)
-                    })
-                    }
+            
+        if (!err && blob) {
+             console.log('blob');
+          console.log(blob);
+          this.vuefile(books.join('/')).then(() => {
+            this.initEpub(blob)
+          })
+        } else {
+            console.log('no');
+          this.vuefile(books.join('/')).then(() => {
+           const url = process.env.VUE_APP_EPUB_URL + '/' + this.fileName + '.epub'
+            // const url = `http://196.168.0.104:8081/epujs/history/2017_Book_RememberingAndDisrememberingTh.epub`;
+            console.log(url);
+            this.initEpub(url)
+          })
+        }
             
            
         });

@@ -31,7 +31,7 @@
       Featured
     },
     computed: {
-      // 动态生成标题数据
+     // 动态生成标题数据
       title() {
         if (this.list) {
           return this.total && this.$t('home.allBook').replace('$1', this.totalNumber)
@@ -57,6 +57,7 @@
     methods: {
       // 获取分类文本
       getCategoryText(key) {
+        // console.log(`${categoryText(categoryList[key], this)}(${this.list[key].length})`);
         return `${categoryText(categoryList[key], this)}(${this.list[key].length})`
       },
       back() {
@@ -72,8 +73,12 @@
       },
       // 通过API获取分类列表
       getList() {
+        
         list().then(response => {
-          this.list = response.data.data
+          // console.log(1);
+          this.list = response.data.data;
+          console.log(response);
+          // console.log(this.list);
           this.total = response.data.total
           const category = this.$route.query.category
           const keyword = this.$route.query.keyword
@@ -86,8 +91,8 @@
             this.list[key] = data;
             
           } else if (keyword) {
-            console.log(this.list);
-            console.log(Object.keys(this.list));
+            // console.log(this.list);
+            // console.log(Object.keys(this.list));
             // 如果用户输入了关键字，则通过书名进行关键字匹配（搜索算法）
             
             Object.keys(this.list).filter(key => {

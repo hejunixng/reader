@@ -35,7 +35,7 @@ export const shelfmixin={
         },
         getShelfList() {
             let shelfList = getBookShelf();
-            // console.log(shelfList);
+            console.log(shelfList);
             if (!shelfList) {
               shelf().then(response => {
                 if (response.status === 200 && response.data && response.data.bookList) {
@@ -133,7 +133,7 @@ export const vuexmin={
                break;
        case 'Eye':
             addCss(`${process.env.VUE_APP_RES_URL}/theme/theme_eye.css`)
-            breadk;
+            break;
         case 'Gold':
             addCss(`${process.env.VUE_APP_RES_URL}/theme/theme_gold.css`);
             break;
@@ -175,12 +175,15 @@ export const vuexmin={
         
     },
     display(target,cb){
+       
         if(target){
+            
             this.currentbook.rendition.display(target).then(()=>{
                 this.refresh();
                 if(cb) cb()
             })
         }else{
+            console.log(1);
             return this.currentbook.rendition.display().then(()=>{
                 this.refresh();
                 if(cb) cb()

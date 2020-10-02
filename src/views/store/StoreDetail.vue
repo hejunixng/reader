@@ -169,18 +169,21 @@
     },
     methods: {
       addOrRemoveShelf() {
-        // // 如果电子书存在于书架，则从书架中移除电子书
-        // if (this.inBookShelf) {
-        //   this.set(removeFromBookShelf(this.bookItem))
-        //     .then(() => {
-        //       // 将书架数据保存到LocalStorage
-        //       saveBookShelf(this.shelfList)
-        //     })
-        // } else {
-        //   // 如果电子书不存在于书架，则添加电子书到书架
-        //   addToShelf(this.bookItem)
-        //   this.set(getBookShelf())
-        // }
+        // console.log(this.inBookShelf);
+        // 如果电子书存在于书架，则从书架中移除电子书
+        if (this.inBookShelf) {
+          console.log(removeFromBookShelf(this.bookItem));
+          this.setShelfList(removeFromBookShelf(this.bookItem))
+            .then(() => {
+              // console.log(this.inBookShelf);
+              // 将书架数据保存到LocalStorage
+              saveBookShelf(this.shelfList)
+            })
+        } else {
+          // 如果电子书不存在于书架，则添加电子书到书架
+          addToShelf(this.bookItem)
+          this.setShelfList(getBookShelf())
+        }
       },
       // 展示Toast弹窗
       showToast(text) {
@@ -192,31 +195,10 @@
         // 跳转到阅读器页面
         this.$router.push({
           path: `/ebook/${this.bookItem.categoryText}|${this.fileName}`
+          // path: `/ebook/history|2018_Book_AgileProcessesInSoftwareEngine`
         })
       },
-      // 听书
-      trialListening() {
-        // 如果电子书已经缓存，从IndexedDB中读取电子书
-        getLocalForage(this.bookItem.fileName, (err, blob) => {
-          if (!err && blob && blob instanceof Blob) {
-            this.$router.push({
-              path: '/store/speaking',
-              query: {
-                fileName: this.bookItem.fileName
-              }
-            })
-          } else {
-            // 如果没有缓存，直接跳转到听书页面
-            this.$router.push({
-              path: '/store/speaking',
-              query: {
-                fileName: this.bookItem.fileName,
-                opf: this.opf
-              }
-            })
-          }
-        })
-      },
+     
       // 通过章节阅读电子书
       read(item) {
         this.$router.push({
@@ -287,26 +269,29 @@
         this.fileName = this.$route.query.fileName
         // 获取电子书分类
         this.categoryText = this.$route.query.category
+        
         if (this.fileName) {
           // 请求API，获取电子书详情数据
+          
           detail({
             fileName: this.fileName
           }).then(response => {
+            
             if (response.status === 200 && response.data.error_code === 0 && response.data.data) {
-              const data = response.data.data;
-              // console.log(response);
+              
+              const data = response.data.data
               // 保存电子书详情数据
               this.bookItem = data
+              console.log(data);
               // 获取封面数据
               this.cover = this.bookItem.cover
               // 获取rootFile数据
               let rootFile = data.rootFile
-              // 如果是以/开头，则用substring截取
               if (rootFile.startsWith('/')) {
                 rootFile = rootFile.substring(1, rootFile.length)
               }
               // 根据rootFile拼接出opf文件路径
-              this.opf = `${process.env.VUE_APP_EPUB_OPF_URL}/${this.fileName}/${rootFile}`
+             this.opf = `${process.env.VUE_APP_EPUB_OPF_URL}/${this.fileName}/${rootFile}`
               // 解析电子书
               this.parseBook(this.opf)
             } else {

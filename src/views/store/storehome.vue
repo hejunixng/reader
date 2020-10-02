@@ -88,9 +88,11 @@ export default {
                 this.guessyoulike = data.guessYouLike;
                 this.recommend = data.recommend;
                 this.fetured = data.featured;
-                // console.log(data);
+                
                 this.categoryList = data.categoryList;
+               
                 this.categories = data.categories;
+                //  console.log(  this.categories);
             }
         })
     }

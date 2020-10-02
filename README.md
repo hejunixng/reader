@@ -3,6 +3,8 @@
 ## Project setup
 ```
 图书阅读
+框架：vue
+后端用node + express
 npm install
 ```
 

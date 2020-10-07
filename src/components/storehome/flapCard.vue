@@ -192,7 +192,7 @@ export default {
             // 数据请求完毕后，隐藏
             setTimeout(()=>{
                 // 停止动画
-               
+              this.close()
             },2500)
         },
 
@@ -205,16 +205,18 @@ export default {
             }, 400);
             this.timeout2 = setTimeout(()=>{
                   //   停止动画
-            // this.runFlapCardAnimation = false;
-            this.stopAnamimation()
+            this.runFlapCardAnimation = false;
+                this.stopAnamimation()
                 this.runBookCardAnimation = true;
-                
+                this.close()
             },2500)
         },
         // 图书推荐
         categoryText(){
             if(this.data){
                 categoryText(this.data.category,this)
+            }else{
+              return ''
             }
             
         }

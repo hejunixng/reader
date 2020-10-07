@@ -57,7 +57,7 @@
     methods: {
       // 获取分类文本
       getCategoryText(key) {
-        // console.log(`${categoryText(categoryList[key], this)}(${this.list[key].length})`);
+       
         return `${categoryText(categoryList[key], this)}(${this.list[key].length})`
       },
       back() {
@@ -92,7 +92,7 @@
             
           } else if (keyword) {
             // console.log(this.list);
-            // console.log(Object.keys(this.list));
+            
             // 如果用户输入了关键字，则通过书名进行关键字匹配（搜索算法）
             
             Object.keys(this.list).filter(key => {
@@ -103,7 +103,7 @@
         })
       }
     },
-    created() {
+    mounted() {
       this.getList()
       this.titleText = this.$route.query.categoryText;
 

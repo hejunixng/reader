@@ -131,7 +131,7 @@ export default {
                 }, reject, progressEvent => {
                     const progress = Math.floor(progressEvent.loaded / progressEvent.total * 100) + '%'
                     text = this.$t('shelf.progressDownload').replace('$1', `${book.fileName}.epub(${progress})`)
-                    toast.updateText('waiting')
+                    toast.updateText('waiting...')
                 })
                 })
       },

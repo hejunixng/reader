@@ -2,10 +2,11 @@
 
 ## Project setup
 ```
+npm install
 图书阅读
 框架：vue
-后端用node + express
-npm install
+后端用node + express，静态资源：图书资源、主题资源、图片资源等放在nginx
+
 ```
 
 ### Compiles and hot-reloads for development

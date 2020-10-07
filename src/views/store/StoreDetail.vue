@@ -52,19 +52,11 @@
           </div>
         </div>
       </div>
-      <div class="book-detail-content-wrapper">
-        <div class="book-detail-content-title">{{$t('detail.trial')}}</div>
-        <div class="book-detail-content-list-wrapper">
-          <div class="loading-text-wrapper" v-if="!this.displayed">
-            <span class="loading-text">{{$t('detail.loading')}}</span>
-          </div>
-        </div>
-        <div id="preview" v-show="this.displayed" ref="preview"></div>
-      </div>
+     
     </scroll>
     <div class="bottom-wrapper">
       <div class="bottom-btn" @click.stop.prevent="readBook()">{{$t('detail.read')}}</div>
-      <div class="bottom-btn" @click.stop.prevent="trialListening()">{{$t('detail.listen')}}</div>
+      
       <div class="bottom-btn" @click.stop.prevent="addOrRemoveShelf()">
         <span class="icon-check" v-if="inBookShelf"></span>
         {{inBookShelf ? $t('detail.isAddedToShelf') : $t('detail.addOrRemoveShelf')}}
@@ -306,22 +298,22 @@
         this.$router.go(-1)
       },
       // 根据传入的目录信息，渲染电子书
-      display(location) {
-        if (this.$refs.preview) {
-          if (!this.rendition) {
-            this.rendition = this.book.renderTo('preview', {
-              width: window.innerWidth > 640 ? 640 : window.innerWidth,
-              height: window.innerHeight,
-              method: 'default'
-            })
-          }
-          if (!location) {
-            return this.rendition.display()
-          } else {
-            return this.rendition.display(location)
-          }
-        }
-      },
+      // display(location) {
+      //   if (this.$refs.preview) {
+      //     if (!this.rendition) {
+      //       this.rendition = this.book.renderTo('preview', {
+      //         width: window.innerWidth > 640 ? 640 : window.innerWidth,
+      //         height: window.innerHeight,
+      //         method: 'default'
+      //       })
+      //     }
+      //     if (!location) {
+      //       return this.rendition.display()
+      //     } else {
+      //       return this.rendition.display(location)
+      //     }
+      //   }
+      // },
       // 处理用户滚动事件，确定标题阴影的显示状态
       onScroll(offsetY) {
         if (offsetY > realPx(42)) {

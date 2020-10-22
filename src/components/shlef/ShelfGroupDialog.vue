@@ -42,6 +42,7 @@
   import { shelfmixin } from '../../utils/mixins'
   import { removeShelf, appendToShelf } from '../../utils/store'
   import { saveBookShelf } from '../../utils/localStorage'
+import { log } from 'util'
 
   export default {
     name: 'group-dialog',
@@ -63,19 +64,23 @@
       defaultCategory() {
         return [
           {
+            // 新建分组
             title: this.$t('shelf.newGroup'),
             edit: 1
           },
           {
+            // 移除分组
             title: this.$t('shelf.groupOut'),
             edit: 2
           }
         ]
       },
       category() {
+        
         return this.shelfList.filter(item => item.type === 2)
       },
       categoryList() {
+        
         return [...this.defaultCategory, ...this.category]
       },
       title() {
@@ -101,27 +106,34 @@
         }, 200)
       },
       onGroupClick(item) {
+        // 新建分组
         if (item.edit && item.edit === 1) {
           this.ifNewGroup = true
         } else if (item.edit && item.edit === 2) {
+          // 移除分组
           this.moveOutFromGroup(item)
         } else {
+          // 加入到其他分组
           this.moveToGroup(item)
         }
       },
       clear() {
         this.newGroupName = ''
       },
+      // 移动到分组里
       moveToGroup(group) {
         this.setShelfList(this.shelfList
           .filter(book => {
             if (book.itemList) {
+             
+              // 1.原本外面的数组要剔除 选择了的书本
               book.itemList = book.itemList.filter(subBook => this.shelfSelected.indexOf(subBook) < 0)
             }
             return this.shelfSelected.indexOf(book) < 0
           }))
           .then(() => {
             if (group && group.itemList) {
+              // 2.当前分组下的书和选中的书合并
               group.itemList = [...group.itemList, ...this.shelfSelected]
             }
             group.itemList.forEach((item, index) => {
@@ -134,23 +146,29 @@
       moveOutFromGroup() {
         this.moveOutOfGroup(this.onComplete)
       },
+      // 新建分组
       createNewGroup() {
+        // 内容不能为空
         if (!this.newGroupName || this.newGroupName.length === 0) {
           return
         }
+
         if (this.showNewGroup) {
           this.shelfCategory.title = this.newGroupName
           this.onComplete()
         } else {
           const group = {
-            // 最后一个为增加状态
+            // 最后一个为增加状态，所以要排除掉
             id: this.shelfList[this.shelfList.length - 2].id + 1,
             itemList: [],
             selected: false,
             title: this.newGroupName,
+            // 表示为分组
             type: 2
           }
+          // 移除最后一个+
           let list = removeShelf(this.shelfList)
+          // 增加
           list.push(group)
           list = appendToShelf(list)
           this.setShelfList(list).then(() => {

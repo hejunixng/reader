@@ -94,41 +94,20 @@ export default {
                 })
             }
       },
-        // downloadBook(book){
-        //     let text = 'please waitting...';
-        //     const toast = this.totast({
-        //         text
-        //     })
-        //     toast.continueShow()
-        //     // 异步下载
-        //     // console.log(this.shelfList);
-        //     return new Promise((resolve,reject)=>{
-        //         download(book,(res)=>{ 
-        //             // 成功回调
-        //             // console.log('ok');
-        //             resolve(book)
-        //         },()=>{
-        //             // console.log("11");
-        //         },progressEvent=>{
-        //         //   下载进度
-        //         const progress = Math.floor(progressEvent.loaded / progressEvent.total * 100) + '%'
-        //     const tt = this.$t('shelf.progressDownload').replace('$1', `${book.fileName}.epub(${progress})`)
-        //         // toast.updateText('please waitting')
-        //         // console.log(progressEvent);
-        //         })
-        //     })
-        // },
+        
          downloadBook(book) {
-                let text = ''
+                let text = '';
                 const toast = this.totast({
                 text
                 })
                 toast.continueShow()
                 return new Promise((resolve, reject) => {
                 download(book, book => {
+                    // 成功回调
                     toast.remove()
                     resolve(book)
                 }, reject, progressEvent => {
+                     //   下载进度
                     const progress = Math.floor(progressEvent.loaded / progressEvent.total * 100) + '%'
                     text = this.$t('shelf.progressDownload').replace('$1', `${book.fileName}.epub(${progress})`)
                     toast.updateText('waiting...')
@@ -162,10 +141,10 @@ export default {
 
         if (this.isdownload) {
             // 移除
-            console.log('remove');
+            // console.log('remove');
           this.removeSelectedBook()
         } else {
-            console.log('re');
+            // console.log('re');
             // 异步下载，等待下载完成
           await this.downloadSelectedBook()
           saveBookShelf(this.shelfList)
@@ -263,6 +242,7 @@ export default {
                     this.showDownload()
                     break
                 case 3:
+                    // 移动
                     this.dialog().show()
                     break
                 case 4:

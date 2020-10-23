@@ -284,9 +284,7 @@ export default {
                     font-weight: bold;
                 }
             }
-            .slide-contens-item-page{
-
-            }
+            
         }
     }
     .slide-search-list{

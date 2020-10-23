@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-
+    <!-- 书签内容 -->
     <Scroll 
         class="slide-contents-list"
         :top="156"
@@ -57,7 +57,7 @@
     </div>
     </Scroll>
 
-    <!--  -->
+    <!-- 搜索框结果 -->
     <Scroll 
         class="slide-search-list"
         :top='66'
@@ -92,7 +92,7 @@ export default {
     },
     mixins:[vuexmin],
     methods:{
-        // 
+        // 搜索框
         search(){
             //搜索
             if(this.searchText && this.searchText.length>0){
@@ -113,11 +113,13 @@ export default {
             this.display(tar,()=>{
                 this.hideTitle();
                 if(highlight){
-                    console.log(tar);
+                    // console.log(tar);
+                    // 书籍内容高亮
                     this.currentbook.rendition.annotations.highlight(tar)
                 }
             })
         },
+        // 二级目录缩进
         contentItem(item){
            return {
                marginLeft:`${px2rem(item.level * 15)}rem`
@@ -131,14 +133,15 @@ export default {
             this.searchList = [];
             this.searchText =''
         },
-        // 全文搜索
+        // 全文搜索算法
         doSearch(q) {
         return Promise.all(
+            // 查询所有书籍内容
           this.currentbook.spine.spineItems.map(
             section => section.load(this.currentbook.load.bind(this.currentbook))
               .then(section.find.bind(section, q))
               .finally(section.unload.bind(section)))
-            //   二维数组变一维数组
+            //   二维数组变一维数组 [].concat.apply([], results)
         ).then(results => Promise.resolve([].concat.apply([], results)))
       },
     },

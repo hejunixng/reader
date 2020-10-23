@@ -5,7 +5,7 @@
         <div class="slide-content-warpper" v-show="menuVisible && settingVisible == 3">
            <transition name="slide-right">
                 <div class="content" v-if="settingVisible == 3">
-                <!-- 左侧 -->
+                <!-- 左侧 动态组件 -->
                 <div class="content-page-wrapper" v-if="bookAvailable">
                     <div class="content-page">
                         <component :is="currentTab == 1? content : bookmark"></component>

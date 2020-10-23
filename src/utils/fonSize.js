@@ -114,5 +114,7 @@ export function TimeMinutes(fileName){
 
 // 数组变为一维数组
 export function flatten(array) {
+  // [].concat([1],[2]) => [1,2]
+  // array.map(item => [].concat(item, ...flatten(item.subitems)) => [[1,2,3],[4]]
   return [].concat(...array.map(item => [].concat(item, ...flatten(item.subitems))))
 }

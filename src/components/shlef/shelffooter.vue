@@ -87,6 +87,7 @@ export default {
             
         },
         async downloadSelectedBook() {
+            // 循环每一本书去下载
             for (let i = 0; i < this.shelfSelected.length; i++) {
             await this.downloadBook(this.shelfSelected[i])
                 .then(book => {
@@ -102,6 +103,7 @@ export default {
                 })
                 toast.continueShow()
                 return new Promise((resolve, reject) => {
+                    // download在api
                 download(book, book => {
                     // 成功回调
                     toast.remove()
@@ -137,15 +139,13 @@ export default {
            
             saveBookShelf(this.shelfList);
             this.hidepop();
-          
-
         if (this.isdownload) {
             // 移除
             // console.log('remove');
           this.removeSelectedBook()
         } else {
             // console.log('re');
-            // 异步下载，等待下载完成
+            // 异步下载，等待下载完成，await阻塞后面的代码
           await this.downloadSelectedBook()
           saveBookShelf(this.shelfList)
             // 下载完成后 更改提示信息
@@ -291,7 +291,6 @@ export default {
             }else{
                 return this.shelfSelected.every((item)=>{
                     // 选中的每一个都是私密
-                //    console.log('nod');
                 //    console.log(this.shelfSelected);
                    return item.cache
                 })

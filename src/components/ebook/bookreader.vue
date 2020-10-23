@@ -196,13 +196,16 @@ export default {
                     this.book.loaded.metadata.then(metadata =>{
                         this.setmetadata(metadata)
                     });
+                    // 获取目录
                     this.book.loaded.navigation.then(nav => {
-                        const navItem = flatten(nav.toc)
+                        // nav.toc目录 树状多维数据变为1维结构
+                        const navItem = flatten(nav.toc);
 
+                        // nav.parnent 与上级的id是否相同，则为第二级
                         function find(item, level = 0) {
                             return !item.parent ? level : find(navItem.filter(parentItem => parentItem.id === item.parent)[0], ++level)
                         }
-
+                            // 、添加level属性
                         navItem.forEach(item => {
                             item.level = find(item)
                         })

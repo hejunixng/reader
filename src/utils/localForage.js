@@ -40,7 +40,7 @@ export function lengthLocalForage(cb) {
     // console.log(err)
   })
 }
-
+// 循环
 export function iteratorLocalForage() {
   localForage.iterate(function(value, key, iterationNumber) {
     // console.log([key, value])
@@ -51,7 +51,7 @@ export function iteratorLocalForage() {
     // console.log(err)
   })
 }
-
+// 查看是否支持indexdb
 export function support() {
   const indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || null
   if (indexedDB) {

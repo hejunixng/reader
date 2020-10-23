@@ -46,13 +46,14 @@ export default {
     computed:{
         // 电子书标题
         getSectionName(){
+            // get只能获取以及目录
             // if(this.section){
             //     const sectionObj = this.currentbook.section(this.section);
             //     if(sectionObj && sectionObj.href && this.currentbook.navigation){
             //         return this.currentbook.navigation.get(sectionObj.href).label
             //     }
             // }
-
+            // 直接用一维数组显示
             return this.section ? this.navigation[this.section].label :''
         }
     },

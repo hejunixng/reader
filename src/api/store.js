@@ -2,14 +2,17 @@ import axios from 'axios';
 import{setLocalForage} from '../utils/localForage';
 
 export function download(book, onSucess, onError, onProgress) {
-    if (onProgress == null) {
+    // 检查
+  if (onProgress == null) {
       onProgress = onError
       onError = null
     }
     return axios.create({
       baseURL: process.env.VUE_APP_EPUB_URL,
       method: 'get',
+      // 二进制
       responseType: 'blob',
+      // 超时
       timeout: 180 * 1000,
       onDownloadProgress: progressEvent => {
         //   进度

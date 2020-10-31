@@ -152,7 +152,7 @@ doSearch(q) {
 ```
 ### 二、书城首页
 ### 2.1书城
-![image](https://gitee.com/hejunxing/readimaggmall/raw/master/%E6%90%9C%E7%B4%A2%E6%A1%86.gif)
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E6%90%9C%E7%B4%A2%E6%A1%86.gif)
 
 #### 书城首页下拉时，顶部搜索框错位的效果。
 1. 原理是将顶部搜索模块分为3个独立部分，回退按钮、中间标题、搜索框。
@@ -160,9 +160,9 @@ doSearch(q) {
 
 ### 2.2图书分类
 
-![image](https://gitee.com/hejunxing/readimaggmall/raw/master/%E7%B1%BB%E5%88%AB1%E5%B0%8F.png)
-![image](https://gitee.com/hejunxing/readimaggmall/raw/master/%E7%B1%BB%E5%88%AB2%E5%B0%8F.png)
-![image](https://gitee.com/hejunxing/readimaggmall/raw/master/%E7%B1%BB%E5%88%AB4%E5%B0%8F.png) 
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E7%B1%BB%E5%88%AB1%E5%B0%8F.png)
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E7%B1%BB%E5%88%AB2%E5%B0%8F.png)
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E7%B1%BB%E5%88%AB4%E5%B0%8F.png) 
 
 ### 类别详情
 ![image](https://gitee.com/hejunxing/readimage/raw/master/%E7%B1%BB%E5%88%AB%E8%AF%A6%E6%83%85.gif)

@@ -48,7 +48,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 加入书架
 
 
-项目简介：图书阅读项目，实现
+项目简介：该项目实现主流读书软件的阅读、书架和书城、目录等模块，以及书签收藏、图书下载、字体设置、中英语言切换等功能。
 框架：vue全家桶
 后端用node + express搭建；
 静态资源：图书资源、主题资源、图片资源等部署在nginx

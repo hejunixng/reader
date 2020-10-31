@@ -5,6 +5,23 @@
 npm install
 
 ```
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Description
 ```
 阅读器页
@@ -180,7 +197,7 @@ doSearch(q) {
 
 
 ### 三、书架
-![image](https://gitee.com/hejunxing/readimaggmall/raw/master/%E4%B9%A6%E6%9E%B6.png)
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E4%B9%A6%E6%9E%B6.png)
 
 书架：
 1. 图书在编辑模式点击有私密阅读、下载图书、移动分组、移除图书功能
@@ -189,7 +206,7 @@ doSearch(q) {
 ### 3.1图书下载功能
 ![image](https://gitee.com/hejunxing/readimage/raw/master/%E4%B8%8B%E8%BD%BD1.gif)
 
-![image](https://gitee.com/hejunxing/readimaggmall/raw/master/%E4%B8%8B%E8%BD%BD2.gif)
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E4%B8%8B%E8%BD%BD2.gif)
 
 通过axios下载图书数据，转为二进制数据后，存储到IndexDB，最后解析并渲染图书
 ```
@@ -229,20 +246,4 @@ export function download(book, onSucess, onError, onProgress) {
 “加入书架功能”是把当前图书信息存储到LocalStroage和Vuex中，让其他组件使用，最后在书架页面中显示
 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

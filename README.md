@@ -42,7 +42,7 @@ npm install
 #### 主要分为三大部分：读书页面、书架、书城首页
 
 ### 一、读书页面 
-![image](https://gitee.com/hejunxing/readimaggmall/raw/master/%E8%AF%BB%E4%B9%A6%E9%A1%B5%E9%9D%A20.gif)
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E8%AF%BB%E4%B9%A6%E9%A1%B5%E9%9D%A20.gif)
 
 ### 1.1字体设置、主题切换等
 ![image](https://gitee.com/hejunxing/readimage/raw/master/%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE.gif)

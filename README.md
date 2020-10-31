@@ -46,7 +46,7 @@ npm install
 
 ### 1.1字体设置、主题切换等
 ![image](https://gitee.com/hejunxing/readimage/raw/master/%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE.gif)
-![image](https://gitee.com/hejunxing/readimaggmall/raw/master/%E4%B8%BB%E9%A2%98%E7%AD%89.gif)
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E4%B8%BB%E9%A2%98%E7%AD%89.gif)
 ```
 FONT_SIZE_LIST = [
   { fontSize: 12 },

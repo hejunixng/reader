@@ -65,7 +65,7 @@ FONT_SIZE_LIST = [
 
 ### 1.2书签介绍
 ### 书签添加
-![image](https://gitee.com/hejunxing/readimage/raw/master/%E4%B9%A6%E7%AD%BE%E5%85%A8.gif)
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E4%B9%A6%E7%AD%BE%E5%85%A8.gif)
 
 ### 书签功能是这次项目较为复杂和多步骤的交互功能。
 #### 主要是：
@@ -135,7 +135,7 @@ function find(item, level = 0) {
 
 ```
 ### 1.4搜索功能 
-![image](https://gitee.com/hejunxing/readimaggmall/raw/master/%E6%90%9C%E7%B4%A2%E6%A1%86.png)
+![image](https://raw.githubusercontent.com/hejunixng/readimage/master/%E6%90%9C%E7%B4%A2%E6%A1%86.png)
 
 搜索功能是用到Epubjs提供的全文搜索算法，拿来主义
 ```

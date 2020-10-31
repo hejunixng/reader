@@ -8,6 +8,7 @@ export function download(book, onSucess, onError, onProgress) {
       onError = null
     }
     return axios.create({
+      // http://196.168.0.106:8081/epub
       baseURL: process.env.VUE_APP_EPUB_URL,
       method: 'get',
       // 二进制
